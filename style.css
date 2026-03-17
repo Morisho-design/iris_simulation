@@ -8,7 +8,7 @@ body{
 }
 
 /* =====================
-   PC（横並び）
+   PC：横並び
 ===================== */
 .app{
   display:flex;
@@ -23,30 +23,25 @@ body{
   overflow-y:auto;
 }
 
-/* 表示エリア（余白なし） */
+/* 表示エリア */
 .viewer{
   flex:1;
-  display:block;        /* ←重要 */
-  padding:0;            /* ←隙間消す */
-  overflow:hidden;      /* ←横ブレ防止 */
+  padding:0;
+  overflow:hidden;
 }
 
-/* ステージ（レスポンシブ本体） */
+/* ステージ（基準サイズ） */
 .stage{
   position:relative;
 
   width:100%;
   max-width:894px;
-
   aspect-ratio:894 / 1016;
-  height:auto;
 
-  margin:0 auto;        /* ←中央固定 */
-
-  transform:none;       /* ←scale禁止 */
+  margin:0 auto;
 }
 
-/* 背景 */
+/* 画像共通（重要修正済） */
 #wall,
 #floor,
 #furniture{
@@ -54,7 +49,8 @@ body{
   inset:0;
   width:100%;
   height:100%;
-  object-fit:cover;
+
+  object-fit:contain; /* ←拡大防止 */
 }
 
 /* 仏壇 */
@@ -63,10 +59,19 @@ body{
   bottom:0;
   left:50%;
   transform:translateX(-50%);
+
+  max-width:100%;
+  height:auto;
+}
+
+/* ボタン */
+button{
+  display:block;
+  margin:4px 0;
 }
 
 /* =====================
-   スマホ（縦並び）
+   スマホ：縦並び
 ===================== */
 @media (max-width:900px){
 
@@ -85,10 +90,4 @@ body{
     overflow:visible;
   }
 
-}
-
-/* ボタン */
-button{
-  display:block;
-  margin:4px 0;
 }
