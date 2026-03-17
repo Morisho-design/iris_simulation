@@ -1,46 +1,48 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>仏壇シミュレーター</title>
-  <link rel="stylesheet" href="./style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>仏壇シミュレーター</title>
+<link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
-  <div class="app">
-    <main class="viewer">
-      <div class="stage" id="stage">
-        <img id="wall" src="walls/walls_ivory.png" alt="壁" />
-        <img id="floor" src="floors/floors_natural.png" alt="床" />
-        <img id="furniture" src="" alt="家具" style="display:none;" />
-        <img id="butsudan" src="butsudan/iris1300.png" alt="仏壇" />
-      </div>
-    </main>
 
-    <aside class="panel">
-      <section class="menu-group">
-        <h3>壁</h3>
-        <div id="wallButtons" class="button-list"></div>
-      </section>
+<div class="app">
 
-      <section class="menu-group">
-        <h3>床</h3>
-        <div id="floorButtons" class="button-list"></div>
-      </section>
+  <!-- 表示 -->
+  <div class="viewer">
+    <div class="stage">
 
-      <section class="menu-group">
-        <h3>家具</h3>
-        <button id="toggleFurniture" type="button">非表示</button>
-        <div id="furnitureButtons" class="button-list"></div>
-      </section>
+      <img id="wall" src="walls/walls_ivory.png">
+      <img id="floor" src="floors/floors_natural.png">
+      <img id="furniture" style="display:none;">
+      <img id="butsudan" src="butsudan/iris1300.png">
 
-      <section class="menu-group">
-        <h3>仏壇</h3>
-        <div id="butsudanButtons" class="button-list"></div>
-      </section>
-    </aside>
+    </div>
   </div>
 
-  <script src="./script.js"></script>
+  <!-- メニュー -->
+  <div class="panel">
+
+    <h3>壁</h3>
+    <div id="wallButtons"></div>
+
+    <h3>床</h3>
+    <div id="floorButtons"></div>
+
+    <h3>家具</h3>
+    <button id="toggleFurniture">非表示</button>
+    <div id="furnitureButtons"></div>
+
+    <h3>仏壇</h3>
+    <div id="butsudanButtons"></div>
+
+  </div>
+
+</div>
+
+<script src="./script.js"></script>
 </body>
 </html>
