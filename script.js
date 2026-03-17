@@ -7,7 +7,7 @@ const toggleBtn = document.getElementById("toggleFurniture");
 
 let furnitureVisible = false;
 
-/* ファイル一覧（全部） */
+/* データ */
 
 const walls = [
 "walls_beige.png",
@@ -17,6 +17,7 @@ const walls = [
 "walls_ivory2.png",
 "walls_washitsu.png",
 "walls_washitsu2.png",
+"walls_white.png"
 ];
 
 const floors = [
@@ -46,51 +47,54 @@ const butsudans = [
 ];
 
 /* ボタン生成 */
+
 function createButtons(list, containerId, folder, target, isFurniture=false){
 
-const container = document.getElementById(containerId);
+  const container = document.getElementById(containerId);
 
-list.forEach(file=>{
+  list.forEach(file=>{
 
-const btn = document.createElement("button");
-btn.textContent = file;
+    const btn = document.createElement("button");
+    btn.textContent = file;
 
-btn.onclick = ()=>{
-target.src = folder + "/" + file;
+    btn.onclick = ()=>{
+      target.src = folder + "/" + file;
 
-if(isFurniture){
-furniture.style.display = "block";
-furnitureVisible = true;
-toggleBtn.textContent = "表示中";
-}
-};
+      if(isFurniture){
+        furniture.style.display = "block";
+        furnitureVisible = true;
+        toggleBtn.textContent = "表示中";
+      }
+    };
 
-container.appendChild(btn);
+    container.appendChild(btn);
 
-});
+  });
 }
 
 /* 家具ON/OFF */
+
 toggleBtn.onclick = ()=>{
 
-furnitureVisible = !furnitureVisible;
+  furnitureVisible = !furnitureVisible;
 
-furniture.style.display = furnitureVisible ? "block" : "none";
-toggleBtn.textContent = furnitureVisible ? "表示中" : "非表示";
+  furniture.style.display = furnitureVisible ? "block" : "none";
+  toggleBtn.textContent = furnitureVisible ? "表示中" : "非表示";
 
 };
 
-/* スケール */
+/* スケール調整 */
+
 function fit(){
 
-const stage = document.querySelector(".stage");
+  const stage = document.querySelector(".stage");
 
-const scaleW = window.innerWidth / 894;
-const scaleH = window.innerHeight / 1016;
+  const scaleW = window.innerWidth / 894;
+  const scaleH = window.innerHeight / 1016;
 
-const scale = Math.min(scaleW, scaleH);
+  const scale = Math.min(scaleW, scaleH);
 
-stage.style.transform = `scale(${scale})`;
+  stage.style.transform = `scale(${scale})`;
 
 }
 
@@ -98,6 +102,7 @@ window.addEventListener("load", fit);
 window.addEventListener("resize", fit);
 
 /* 初期化 */
+
 createButtons(walls,"wallButtons","walls",wall);
 createButtons(floors,"floorButtons","floors",floor);
 createButtons(furnitures,"furnitureButtons","furniture",furniture,true);
