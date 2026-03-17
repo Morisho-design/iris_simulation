@@ -5,14 +5,15 @@ font-family:sans-serif;
 
 .app{
 display:flex;
+height:100vh;
 }
 
+/* PC */
 .panel{
 width:220px;
 padding:10px;
 background:#eee;
 overflow-y:auto;
-height:100vh;
 }
 
 .viewer{
@@ -30,6 +31,7 @@ height:1318px;
 transform-origin:top center;
 }
 
+/* レイヤー */
 #wall,#floor,#furniture{
 position:absolute;
 width:100%;
@@ -42,4 +44,37 @@ position:absolute;
 bottom:0;
 left:50%;
 transform:translateX(-50%);
+}
+
+/* ------------------ */
+/* 🔽 ここがレスポンシブ */
+/* ------------------ */
+
+@media (max-width: 900px){
+
+.app{
+flex-direction:column;
+}
+
+/* 画面（上） */
+.viewer{
+height:70vh;
+}
+
+/* メニュー（下） */
+.panel{
+width:100%;
+height:30vh;
+overflow-x:auto;
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+align-content:flex-start;
+}
+
+/* ボタンを横並び */
+.panel button{
+min-width:120px;
+}
+
 }
