@@ -3,85 +3,92 @@ const floor = document.getElementById("floor");
 const furniture = document.getElementById("furniture");
 const butsudan = document.getElementById("butsudan");
 
-const toggleBtn = document.getElementById("toggleFurniture");
+const wallButtons = document.getElementById("wallButtons");
+const floorButtons = document.getElementById("floorButtons");
+const furnitureButtons = document.getElementById("furnitureButtons");
+const butsudanButtons = document.getElementById("butsudanButtons");
 
-let furnitureVisible = false;
+const toggleFurniture = document.getElementById("toggleFurniture");
 
-/* データ */
-const walls = [
-"walls_beige.png",
-"walls_beige2.png",
-"walls_brown.png",
-"walls_ivory.png",
-"walls_ivory2.png",
-"walls_washitsu.png",
-"walls_washitsu2.png",
-"walls_white.png"
+
+// =====================
+// データ（日本語化）
+// =====================
+
+const wallData = [
+  { label: "アイボリー", src: "walls/walls_ivory.png" },
+  { label: "グレー", src: "walls/walls_gray.png" }
 ];
 
-const floors = [
-"floors_dark.png",
-"floors_ivory.png",
-"floors_middle.png",
-"floors_natural.png",
-"floors_oak.png",
-"floors_tatami.png",
-"floors_tatami2.png",
-"floors_wall.png",
-"floors_light.png"
+const floorData = [
+  { label: "ナチュラル", src: "floors/floors_natural.png" },
+  { label: "ウォールナット", src: "floors/floors_walnut.png" }
 ];
 
-const furnitures = [
-"furniture_dark.png",
-"furniture_light.png"
+const furnitureData = [
+  { label: "なし", src: "" },
+  { label: "サイドボード", src: "furniture/board.png" }
 ];
 
-const butsudans = [
-"iris1200.png",
-"iris1300.png",
-"iris1300tamo.png",
-"iris1500.png",
-"irisEX1200.png",
-"irisEX1300.png"
+const butsudanData = [
+  { label: "アイリス 1300", src: "butsudan/iris1300.png", width: "18%" },
+  { label: "アイリス 1500", src: "butsudan/iris1500.png", width: "20%" },
+  { label: "アイリス 1700", src: "butsudan/iris1700.png", width: "22%" }
 ];
 
-/* ボタン生成 */
-function createButtons(list, containerId, folder, target, isFurniture=false){
 
-  const container = document.getElementById(containerId);
+// =====================
+// ボタン生成
+// =====================
 
-  list.forEach(file=>{
-
+function createButtons(data, container, callback) {
+  data.forEach(item => {
     const btn = document.createElement("button");
-    btn.textContent = file;
+    btn.textContent = item.label;
 
-    btn.onclick = ()=>{
-      target.src = folder + "/" + file;
-
-      if(isFurniture){
-        furniture.style.display = "block";
-        furnitureVisible = true;
-        toggleBtn.textContent = "表示中";
-      }
-    };
+    btn.addEventListener("click", () => {
+      callback(item);
+    });
 
     container.appendChild(btn);
-
   });
 }
 
-/* 家具切替 */
-toggleBtn.onclick = ()=>{
 
-  furnitureVisible = !furnitureVisible;
+// 壁
+createButtons(wallData, wallButtons, item => {
+  wall.src = item.src;
+});
 
-  furniture.style.display = furnitureVisible ? "block" : "none";
-  toggleBtn.textContent = furnitureVisible ? "表示中" : "非表示";
+// 床
+createButtons(floorData, floorButtons, item => {
+  floor.src = item.src;
+});
 
-};
+// 家具
+createButtons(furnitureData, furnitureButtons, item => {
+  if (item.src === "") {
+    furniture.classList.add("hidden");
+  } else {
+    furniture.src = item.src;
+    furniture.classList.remove("hidden");
+  }
+});
 
-/* 初期化 */
-createButtons(walls,"wallButtons","walls",wall);
-createButtons(floors,"floorButtons","floors",floor);
-createButtons(furnitures,"furnitureButtons","furniture",furniture,true);
-createButtons(butsudans,"butsudanButtons","butsudan",butsudan);
+// 仏壇
+createButtons(butsudanData, butsudanButtons, item => {
+  butsudan.src = item.src;
+  butsudan.style.width = item.width;
+});
+
+
+// =====================
+// 家具トグル
+// =====================
+
+toggleFurniture.addEventListener("click", () => {
+  furniture.classList.toggle("hidden");
+
+  toggleFurniture.textContent =
+    furniture.classList.contains("hidden") ? "表示" : "非表示";
+});
