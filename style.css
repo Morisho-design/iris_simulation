@@ -8,45 +8,61 @@ body{
 }
 
 /* =====================
-   PC（横並び）
    PC：横並び
 ===================== */
 .app{
   display:flex;
-@@ -23,38 +23,34 @@
+  height:100vh;
+}
+
+/* メニュー */
+.panel{
+  width:220px;
+  padding:10px;
+  background:#eee;
   overflow-y:auto;
 }
 
-/* 表示エリア（余白なし） */
+/* 各セクション */
+.panel h3{
+  margin:10px 0 6px;
+}
+
+/* ★ここが今回の修正ポイント */
+.panel div{
+  display:flex;
+  flex-wrap:wrap;   /* 折り返し */
+  gap:6px;
+}
+
+/* ボタン */
+button{
+  display:inline-block; /* ← blockやめる */
+  padding:6px 10px;
+  border:none;
+  background:#fff;
+  cursor:pointer;
+  border-radius:4px;
+  font-size:12px;
+}
+
 /* 表示エリア */
 .viewer{
   flex:1;
-  display:block;        /* ←重要 */
-  padding:0;            /* ←隙間消す */
-  overflow:hidden;      /* ←横ブレ防止 */
   padding:0;
   overflow:hidden;
 }
 
-/* ステージ（レスポンシブ本体） */
-/* ステージ（基準サイズ） */
+/* ステージ */
 .stage{
   position:relative;
-
   width:100%;
   max-width:894px;
-
   aspect-ratio:894 / 1016;
-  height:auto;
-
-  margin:0 auto;        /* ←中央固定 */
-
-  transform:none;       /* ←scale禁止 */
   margin:0 auto;
 }
 
 /* 背景 */
-/* 画像共通（重要修正済） */
 #wall,
 #floor,
 #furniture{
@@ -54,40 +70,37 @@ body{
   inset:0;
   width:100%;
   height:100%;
-  object-fit:cover;
-
-  object-fit:contain; /* ←拡大防止 */
+  object-fit:contain;
 }
 
 /* 仏壇 */
-@@ -63,10 +59,19 @@
-  bottom:0;
-  left:50%;
-  transform:translateX(-50%);
-
-  max-width:100%;
-  height:auto;
-}
-
-/* ボタン */
-button{
-  display:block;
-  margin:4px 0;
+#butsudan{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:center bottom;
 }
 
 /* =====================
-   スマホ（縦並び）
    スマホ：縦並び
 ===================== */
 @media (max-width:900px){
 
-@@ -86,9 +91,3 @@
+  .app{
+    flex-direction:column;
+    height:auto;
   }
 
-}
+  .viewer{
+    width:100%;
+  }
 
-/* ボタン */
-button{
-  display:block;
-  margin:4px 0;
+  .panel{
+    width:100%;
+    height:auto;
+    overflow:visible;
+  }
+
 }
