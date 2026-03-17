@@ -7,7 +7,7 @@ const toggleBtn = document.getElementById("toggleFurniture");
 
 let furnitureVisible = false;
 
-/* ===== ファイル一覧（実フォルダ一致） ===== */
+/* ファイル一覧（全部） */
 
 const walls = [
 "walls_beige.png",
@@ -17,7 +17,6 @@ const walls = [
 "walls_ivory2.png",
 "walls_washitsu.png",
 "walls_washitsu2.png",
-"walls_white.png"
 ];
 
 const floors = [
@@ -29,6 +28,7 @@ const floors = [
 "floors_tatami.png",
 "floors_tatami2.png",
 "floors_wall.png",
+"floors_light.png"
 ];
 
 const furnitures = [
@@ -45,8 +45,7 @@ const butsudans = [
 "irisEX1300.png"
 ];
 
-/* ===== ボタン生成 ===== */
-
+/* ボタン生成 */
 function createButtons(list, containerId, folder, target, isFurniture=false){
 
 const container = document.getElementById(containerId);
@@ -57,7 +56,6 @@ const btn = document.createElement("button");
 btn.textContent = file;
 
 btn.onclick = ()=>{
-
 target.src = folder + "/" + file;
 
 if(isFurniture){
@@ -65,7 +63,6 @@ furniture.style.display = "block";
 furnitureVisible = true;
 toggleBtn.textContent = "表示中";
 }
-
 };
 
 container.appendChild(btn);
@@ -73,8 +70,7 @@ container.appendChild(btn);
 });
 }
 
-/* ===== 家具ON/OFF ===== */
-
+/* 家具ON/OFF */
 toggleBtn.onclick = ()=>{
 
 furnitureVisible = !furnitureVisible;
@@ -84,8 +80,7 @@ toggleBtn.textContent = furnitureVisible ? "表示中" : "非表示";
 
 };
 
-/* ===== スケール（超重要） ===== */
-
+/* スケール */
 function fit(){
 
 const stage = document.querySelector(".stage");
@@ -102,8 +97,7 @@ stage.style.transform = `scale(${scale})`;
 window.addEventListener("load", fit);
 window.addEventListener("resize", fit);
 
-/* ===== 初期化 ===== */
-
+/* 初期化 */
 createButtons(walls,"wallButtons","walls",wall);
 createButtons(floors,"floorButtons","floors",floor);
 createButtons(furnitures,"furnitureButtons","furniture",furniture,true);
