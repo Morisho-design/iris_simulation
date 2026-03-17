@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>仏壇シミュレーター</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+<div class="panel">
+
+<h3>壁</h3>
+<div id="wallButtons"></div>
+
+<h3>床</h3>
+<div id="floorButtons"></div>
+
+<h3>家具</h3>
+<button id="toggleFurniture">非表示</button>
+<div id="furnitureButtons"></div>
+
+<h3>仏壇</h3>
+<div id="butsudanButtons"></div>
+
+</div>
+
+<div class="viewer">
+<div class="stage">
+
+<img id="wall" src="walls/walls_ivory.png">
+<img id="floor" src="floors/floors_natural.png">
+<img id="furniture" style="display:none;">
+<img id="butsudan" src="butsudan/iris1300.png">
+
+</div>
+</div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
