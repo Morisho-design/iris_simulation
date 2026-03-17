@@ -23,6 +23,29 @@ body{
   overflow-y:auto;
 }
 
+/* 各セクション */
+.panel h3{
+  margin:10px 0 6px;
+}
+
+/* ★ここが今回の修正ポイント */
+.panel div{
+  display:flex;
+  flex-wrap:wrap;   /* 折り返し */
+  gap:6px;
+}
+
+/* ボタン */
+button{
+  display:inline-block; /* ← blockやめる */
+  padding:6px 10px;
+  border:none;
+  background:#fff;
+  cursor:pointer;
+  border-radius:4px;
+  font-size:12px;
+}
+
 /* 表示エリア */
 .viewer{
   flex:1;
@@ -30,18 +53,16 @@ body{
   overflow:hidden;
 }
 
-/* ステージ（基準サイズ） */
+/* ステージ */
 .stage{
   position:relative;
-
   width:100%;
   max-width:894px;
   aspect-ratio:894 / 1016;
-
   margin:0 auto;
 }
 
-/* 画像共通（重要修正済） */
+/* 背景 */
 #wall,
 #floor,
 #furniture{
@@ -49,25 +70,17 @@ body{
   inset:0;
   width:100%;
   height:100%;
-
-  object-fit:contain; /* ←拡大防止 */
+  object-fit:contain;
 }
 
 /* 仏壇 */
 #butsudan{
   position:absolute;
-  bottom:0;
-  left:50%;
-  transform:translateX(-50%);
-
-  max-width:100%;
-  height:auto;
-}
-
-/* ボタン */
-button{
-  display:block;
-  margin:4px 0;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:center bottom;
 }
 
 /* =====================
