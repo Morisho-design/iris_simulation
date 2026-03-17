@@ -1,48 +1,47 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>仏壇シミュレーター</title>
-<link rel="stylesheet" href="./style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>仏壇シミュレーター</title>
+  <link rel="stylesheet" href="./style.css">
 </head>
-
 <body>
 
-<div class="app">
+  <div class="app">
 
-  <!-- 表示画面 -->
-  <div class="viewer">
-    <div class="stage">
+    <!-- 表示画面 -->
+    <div class="viewer">
+      <div class="stage">
 
-      <img id="wall" src="walls/walls_ivory.png" alt="">
-      <img id="floor" src="floors/floors_natural.png" alt="">
-      <img id="furniture" style="display:none;" alt="">
-      <img id="butsudan" src="butsudan/iris1300.png" alt="">
+        <img id="wall" class="layer layer-wall" src="walls/walls_ivory.png" alt="">
+        <img id="floor" class="layer layer-floor" src="floors/floors_natural.png" alt="">
+        <img id="furniture" class="layer layer-furniture is-hidden" alt="">
+        <img id="butsudan" class="layer layer-butsudan" src="butsudan/iris1300.png" alt="">
+
+      </div>
+    </div>
+
+    <!-- メニュー -->
+    <div class="panel">
+
+      <h3>壁</h3>
+      <div id="wallButtons"></div>
+
+      <h3>床</h3>
+      <div id="floorButtons"></div>
+
+      <h3>家具</h3>
+      <button id="toggleFurniture" type="button">非表示</button>
+      <div id="furnitureButtons"></div>
+
+      <h3>仏壇</h3>
+      <div id="butsudanButtons"></div>
 
     </div>
-  </div>
-
-  <!-- メニュー -->
-  <div class="panel">
-
-    <h3>壁</h3>
-    <div id="wallButtons"></div>
-
-    <h3>床</h3>
-    <div id="floorButtons"></div>
-
-    <h3>家具</h3>
-    <button id="toggleFurniture">非表示</button>
-    <div id="furnitureButtons"></div>
-
-    <h3>仏壇</h3>
-    <div id="butsudanButtons"></div>
 
   </div>
 
-</div>
-
-<script src="./script.js"></script>
+  <script src="./script.js"></script>
 </body>
 </html>
