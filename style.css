@@ -1,77 +1,140 @@
+*{
+  box-sizing:border-box;
+}
+
+html,
 body{
   margin:0;
+  padding:0;
+  height:100%;
   font-family:sans-serif;
 }
 
-/* PC：横並び */
+body{
+  background:#f4f4f4;
+}
+
+/* -------------------------
+   全体構造
+-------------------------- */
 .app{
-  display:flex;
-  height:100vh;
+  display:grid;
+  grid-template-columns:240px 1fr;
+  grid-template-areas:"panel viewer";
+  width:100%;
+  min-height:100vh;
 }
 
-/* メニュー */
+/* -------------------------
+   メニュー（PCでは左）
+-------------------------- */
 .panel{
-  width:220px;
-  padding:10px;
-  background:#eee;
+  grid-area:panel;
+  background:#eeeeee;
+  padding:12px;
   overflow-y:auto;
+  border-right:1px solid #ddd;
 }
 
-/* 表示エリア */
+.menu-group + .menu-group{
+  margin-top:18px;
+}
+
+.menu-group h3{
+  margin:0 0 8px;
+  font-size:16px;
+}
+
+.button-list{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+}
+
+.button-list button,
+#toggleFurniture{
+  border:1px solid #cfcfcf;
+  background:#fff;
+  padding:8px 10px;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:13px;
+  line-height:1.3;
+}
+
+.button-list button:hover,
+#toggleFurniture:hover{
+  background:#f8f8f8;
+}
+
+/* -------------------------
+   表示エリア
+-------------------------- */
 .viewer{
-  flex:1;
+  grid-area:viewer;
   display:flex;
   justify-content:center;
   align-items:flex-start;
   overflow:auto;
-  padding:10px;
+  padding:16px;
+  background:#fafafa;
 }
 
-/* ステージ */
+/* 元の基準サイズ */
 .stage{
   position:relative;
   width:894px;
   height:1016px;
+  flex:0 0 auto;
   transform-origin:top center;
-  flex-shrink:0;
+  background:#ddd;
 }
 
-/* レイヤー */
+/* 背景レイヤー */
 #wall,
 #floor,
 #furniture{
   position:absolute;
+  inset:0;
   width:100%;
   height:100%;
   object-fit:cover;
+  display:block;
 }
 
 /* 仏壇 */
 #butsudan{
   position:absolute;
-  bottom:0;
   left:50%;
+  bottom:0;
   transform:translateX(-50%);
+  display:block;
+  max-width:none;
 }
 
-/* =====================
-   スマホ：縦並び
-===================== */
-@media (max-width:900px){
-
+/* -------------------------
+   スマホ・タブレット
+   上：viewer / 下：panel
+-------------------------- */
+@media (max-width: 1024px){
   .app{
-    flex-direction:column;
-    height:auto;
+    grid-template-columns:1fr;
+    grid-template-rows:auto auto;
+    grid-template-areas:
+      "viewer"
+      "panel";
+    min-height:auto;
   }
 
   .viewer{
-    width:100%;
+    padding:12px;
+    overflow:auto;
   }
 
   .panel{
+    border-right:none;
+    border-top:1px solid #ddd;
     width:100%;
-    height:auto;
     overflow:visible;
   }
-
 }
