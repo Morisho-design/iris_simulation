@@ -2,108 +2,178 @@
   box-sizing: border-box;
 }
 
-body {
+html, body {
   margin: 0;
-  font-family: sans-serif;
-  background: #f5f5f5;
+  padding: 0;
 }
 
-/* レイアウト */
+body {
+  font-family: sans-serif;
+  background: #f5f5f5;
+  color: #222;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
 .app {
   display: grid;
-  grid-template-columns: 1fr 320px;
+  grid-template-columns: minmax(0, 1fr) 320px;
   gap: 24px;
+  align-items: start;
   max-width: 1400px;
-  margin: auto;
+  margin: 0 auto;
   padding: 24px;
 }
 
-/* ステージ */
+.viewer {
+  width: 100%;
+}
+
+/* ステージを必ず同じ比率で扱う */
 .stage {
   position: relative;
   width: 100%;
-  aspect-ratio: 16/10;
+  aspect-ratio: 16 / 10;
   overflow: hidden;
-  background: #ddd;
   border-radius: 16px;
+  background: #ddd;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
 }
 
-/* 共通 */
+/* 共通レイヤー */
 .layer {
   position: absolute;
   user-select: none;
+  pointer-events: none;
 }
 
 /* 壁 */
-.wall {
+.layer-wall {
+  inset: 0;
   width: 100%;
-  height: 70%;
+  height: 72%;
   object-fit: cover;
   z-index: 1;
 }
 
 /* 床 */
-.floor {
+.layer-floor {
+  left: 0;
   bottom: 0;
   width: 100%;
-  height: 30%;
+  height: 32%;
   object-fit: cover;
   z-index: 2;
 }
 
 /* 家具 */
-.furniture {
+.layer-furniture {
   left: 50%;
   bottom: 12%;
   transform: translateX(-50%);
-  width: 40%;
+  width: 42%;
+  height: auto;
   z-index: 3;
 }
 
-/* 仏壇（ここが核） */
-.butsudan {
+/* 仏壇
+   ここを % 基準にするのが重要 */
+.layer-butsudan {
   left: 50%;
   bottom: 14%;
   transform: translateX(-50%);
   width: 18%;
+  max-width: none;
+  height: auto;
   z-index: 4;
 }
 
-/* 非表示 */
-.hidden {
-  display: none;
+/* 非表示用 */
+.is-hidden {
+  display: none !important;
 }
 
-/* UI */
 .panel {
   background: #fff;
-  padding: 20px;
   border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
 }
 
 .panel h3 {
-  margin-top: 0;
+  margin: 0 0 12px;
+  font-size: 16px;
 }
 
-button {
-  padding: 8px 12px;
-  margin: 4px;
-  border-radius: 8px;
+.panel > div,
+.panel > button {
+  margin-bottom: 20px;
+}
+
+/* ボタン表示の最低限 */
+#wallButtons,
+#floorButtons,
+#furnitureButtons,
+#butsudanButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+#wallButtons button,
+#floorButtons button,
+#furnitureButtons button,
+#butsudanButtons button,
+#toggleFurniture {
   border: 1px solid #ccc;
+  background: #fff;
+  padding: 8px 12px;
+  border-radius: 10px;
   cursor: pointer;
 }
 
-/* スマホ対応 */
-@media (max-width: 768px) {
+/* タブレット以下 */
+@media (max-width: 960px) {
   .app {
     grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 16px;
   }
 
+  .panel {
+    width: 100%;
+  }
+}
+
+/* スマホ */
+@media (max-width: 640px) {
   .stage {
-    aspect-ratio: 4/5;
+    aspect-ratio: 4 / 5;
   }
 
-  .butsudan {
-    width: 26%; /* スマホ微調整 */
+  .layer-wall {
+    height: 70%;
+  }
+
+  .layer-floor {
+    height: 34%;
+  }
+
+  .layer-furniture {
+    width: 60%;
+    bottom: 12%;
+  }
+
+  /* スマホでは仏壇を少しだけ大きくする程度に留める */
+  .layer-butsudan {
+    width: 26%;
+    bottom: 14%;
+  }
+
+  .panel {
+    padding: 16px;
   }
 }
