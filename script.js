@@ -28,7 +28,6 @@ const floors = [
 "floors_tatami.png",
 "floors_tatami2.png",
 "floors_wall.png",
-"floors_light.png"
 ];
 
 const furnitures = [
